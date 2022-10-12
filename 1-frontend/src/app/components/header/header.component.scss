@@ -1,0 +1,118 @@
+.container-fluid{
+    padding-left: 0;
+}
+
+.navCol{
+    margin-bottom: 10px;
+}
+.navbar-toggler {
+    width: 100%;
+    float: none;
+    margin-right: 0;
+  }
+.navbar-nav{
+    float: left;
+}
+
+ul{
+    margin-left: 20px;
+}
+ .panel{
+    align-items: center;
+    text-decoration: none;
+    i{
+        font-size: 30px;
+        margin-left: 2rem;
+        color: #34495E;
+        display: flex;
+        flex-direction: row;
+    }
+    mat-icon{
+        font-size: 30px;
+        margin-left: 2rem;
+        color: #34495E;
+        display: flex;
+        flex-direction: row;
+    }
+ }
+ 
+ .total span{
+      display:inline-block;
+      background:#fff;
+      padding:0 10px;
+      color:#000;
+      border-top-right-radius:20px;
+      border-bottom-right-radius:20px;
+      margin-left:6px
+  }
+  .total{
+      background:#34495E;
+      line-height:30px;
+      color:#fff;
+      border-radius:30px;
+      border:1px solid #fff;
+      padding-left:12px
+  }
+.btn-outline-color{
+    border-color: #22c3b4;
+}
+.btn-outline-color:hover{
+    border-color: white;
+    color: white;
+    background-color: #22c3b4 ;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
+.fa-color-full{
+    color: black;
+}
+
+.i-number{
+    background-color: red;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+.hide{
+    visibility: hidden;
+}
+.show{
+  visibility: visible;
+}
+.login-li{
+    position: relative;
+}
+.loginblock{
+   width: 150px;
+   height: 100px;
+   background-color:rgba(#5c8b8d,.7);
+   float: right;
+   border-radius: 10px ;
+   -webkit-border-radius: 10px ;
+   -moz-border-radius: 10px ;
+   -ms-border-radius: 10px ;
+   -o-border-radius: 10px ;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding: 5px;
+   z-index: 999;
+   position: absolute;
+   right: -50px;
+   transition:all 1s ease;
+   -webkit-transition:all 1s ease;
+   -moz-transition:all 1s ease;
+   -ms-transition:all 1s ease;
+   -o-transition:all 1s ease;
+}
+
+.mtop{
+    margin-top: 10px;
+}

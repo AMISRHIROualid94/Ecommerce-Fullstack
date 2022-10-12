@@ -1,0 +1,48 @@
+<div class="sidenav" [ngClass]="collapsed?'sidenav-collapsed':''">
+    <div class="logo-container">
+        <button class="logo"
+        (click)="toggleCollapse()">
+        E
+    </button>
+    <!-- <div class="nav-span" (click)="toggleCollapse()">
+        <span class="sp"></span>
+        <span class="sp sp2"></span>
+        <span class="sp"></span>
+    </div> -->
+    
+        <div class="logo-text" *ngIf="collapsed"  @fadeInOut>commerce</div>
+        <button class="btn-close" 
+        *ngIf="collapsed"
+        (click)="closeSidenav()" @rotate>
+            <i class="fal fa-times close-icon"></i>
+        </button>
+    </div>
+    <div class="category">
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item home-item"
+        @fadeInOut>
+            <a class="sidenav-nav-link"
+            routerLink="/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact :true}"
+            >
+                <i class="sidenav-link-icon fas fa-home"></i>
+                <span class="sidenav-link-text" *ngIf="collapsed" @fadeInOut>Home</span>
+            </a>
+        </li> 
+        <li class="sidenav-nav-item"
+        *ngFor="let data of productCategories;let i = index" 
+        @fadeInOut>
+            <a class="sidenav-nav-link"
+            routerLink="/category/{{data.id}}"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact :true}"
+            >
+                <i class="sidenav-link-icon" [class]="navdata[i].icon"></i>
+                <span class="sidenav-link-text" *ngIf="collapsed">{{data.categoryName}}</span>
+            </a>
+        </li> 
+    </ul>
+   
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light rounded sticky-lg-top">
+  <div class="container-fluid d-flex">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler navCol mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon navbar-dark"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex flex-fill">
+        <input class="form-control mtop" 
+        type="search" placeholder="Search" aria-label="Search"
+         [(ngModel)]="productName"
+         (ngModelChange)="onChange($event)"
+         [ngModelOptions]="{standalone: true}"
+        (focus)="searchFocus()"
+         >
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex mtop"
+      style="flex-direction:row ;">
+      <li class="nav-item">
+      <a href="/cart-details" class="panel">
+        <mat-icon  matBadge="{{totalQuantity>0?totalQuantity:''}}" class="fa fa-shopping-cart" matBadgeColor="warn"></mat-icon>
+      </a>
+    </li>
+    <li class="login-li">
+      <button href="#" class="panel"  
+      style="border: none;background-color: transparent;" (mouseenter)="toggleLoggin()"
+      (mouseleave)="toggleLoggin()">
+        <i class="fa fa-solid fa-user"></i>
+      </button>
+      <div class="loginblock mtop" [ngClass]="loginToggle?'show':'hide'">
+        <div *ngIf="isAuthenticated && userFullName" class="loginblock-items">
+          Welcome back 
+          <br>
+          <b>{{ userFullName }}</b>!
+      </div>
+      
+      <button *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-warning">Login</button>
+      
+      <button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-warning">Logout</button>
+      </div>
+     </li>
+     <li>
+      <button *ngIf="isAuthenticated" routerLink="/order-history"
+      class="panel"  
+      style="border: none;background-color: transparent;" 
+      >
+      <i class="fa fa-solid fa-clock"></i>
+      </button>
+     </li>
+        </ul>
+      </form>
+      
+     
+    
+    </div>
+  </div>
+ 
+</nav>
+
+

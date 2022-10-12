@@ -1,0 +1,36 @@
+.card {
+  min-height: 100px;
+}
+.card-body > a{
+  text-decoration: none;
+  color: black;
+  
+}
+.card-body{
+  position: relative;
+}
+.available,
+.notavailable{
+  position: relative;
+  bottom: -15px;
+}
+.available{
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+.notavailable{
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+select {
+  padding: 0px 5px;
+  margin-left: 8px;
+  height: 36px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}

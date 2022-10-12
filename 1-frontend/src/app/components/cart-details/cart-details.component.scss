@@ -1,0 +1,17 @@
+.cartListDetails{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.cnt{
+    min-width: 200px;
+}
+
+.checkout {
+    width: 100%;
+    text-align: end;
+}

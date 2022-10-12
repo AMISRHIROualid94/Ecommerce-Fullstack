@@ -1,0 +1,29 @@
+
+
+.card{
+    display: flex;
+    flex-direction: row;
+}
+
+.card-d-column{
+    display: flex;
+    flex-direction: column;
+}
+.card-body{
+    position: relative;
+}
+.stock{
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+.available{
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .notavailable{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+  }

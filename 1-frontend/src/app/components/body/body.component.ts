@@ -1,0 +1,31 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
+
+@Component({
+  selector: 'app-body',
+  templateUrl: './body.component.html',
+  styleUrls: ['./body.component.scss']
+})
+export class BodyComponent implements OnInit {
+
+  @Input() collapsed=false;
+  @Input() screenWidth = 0;
+  
+  url:String;
+  constructor() { }
+
+  ngOnInit(): void {
+ 
+  }
+  getBodyClass() :string{
+    let styleClass = '';
+    if(this.collapsed && this.screenWidth > 768){
+      styleClass = 'body-trimmed';
+    }else if(this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0){
+      styleClass = 'body-md-screen';
+    }
+    return styleClass;
+  }
+}

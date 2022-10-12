@@ -1,0 +1,37 @@
+<div class="detail-section">
+  <div class="container-fluid">
+    <div class="card col-12" [ngClass]="getCardClass()">
+      <div class="">
+        <img class="card-img-top" [src]="product.imageUrl" />
+        <div class="stock">
+          <p class="available" *ngIf="product.unitsInStock>0">Available :
+            {{product.unitsInStock}}
+          </p>
+          <p class="notavailable" *ngIf="product.unitsInStock==0">
+            Not Available
+          </p>
+        </div>
+      </div>
+      
+      <div class="">
+        <div class="card-body">
+            <h3 class="card-title">{{ product.name }}</h3>
+            <div class="price mb-2">
+              {{ product.unitPrice | currency: "DH " }}
+            </div>
+           
+            <button class="btn btn-primary add-btn" (click)="addToCart()">Add to cart</button>
+            <hr>
+            <h4>Description</h4>
+          <p class="card-text">
+            {{ product.description }}
+          </p>
+          <a href="#" class="btn btn-primary add-btn" routerLink="/products"
+            >Back to Product List</a
+          >
+          
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

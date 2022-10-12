@@ -1,0 +1,8 @@
+<!-- <div class="opening" [ngClass]="opening?'opening-on':'opening-off'">
+  <button class="btn btn-success" (click)="JoinUs()">Join Us</button>
+</div> -->
+<app-sidenav  (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<app-body
+  [collapsed]="isSideNavCollapsed"
+  [screenWidth]="screenWidth"
+></app-body>
