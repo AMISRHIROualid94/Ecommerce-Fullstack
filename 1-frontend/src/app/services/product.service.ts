@@ -12,18 +12,18 @@ import { navbarData } from '../components/sidenav/nav-data';
 export class ProductService {
 
 
-navdata : navbarData[] = [ 
+navdata : navbarData[] = [
   new navbarData('fal fa-books','BOOKS'),
   new navbarData('fal fa-mug','COFFEE MUG'),
   new navbarData('fal fa-palette','MOUSE PADS'),
   new navbarData('fal fa-tags','LUGGAGE TAGS')
-] 
+]
 
   private baseUrl = 'http://localhost:8080/api/products';
 
   private categoryUrl = 'http://localhost:8080/api/product-category';
 
-
+  private BasePutUrl = 'http://localhost:8080/api/products/setProduct';
 
   constructor(private httpClient : HttpClient) { }
 
@@ -32,6 +32,11 @@ navdata : navbarData[] = [
     return this.httpClient.get<Product>(detailsUrl)
   }
 
+
+setProductUnitInStock(product:Product,id:number) : Observable<any> {
+  const putUrl = `${this.BasePutUrl}/${id}`;
+  return this.httpClient.put<String>(putUrl,product);
+}
   getProductList(categoryId:number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
@@ -44,6 +49,7 @@ navdata : navbarData[] = [
       map(response => response._embedded.products)
     )
   }
+
   getProductByNamePaginate(productName:String,thePage:number,thePageSize:number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${productName}&page=${thePage}&size=${thePageSize}`;
     return this.httpClient.get<GetResponseProducts>(searchUrl)
@@ -53,7 +59,7 @@ navdata : navbarData[] = [
       map(response => response._embedded.productCategory)
     )
   }
-  
+
 
   getProductPaginate(thePage:number,
     thePageSize:number,

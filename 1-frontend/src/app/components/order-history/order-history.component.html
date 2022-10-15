@@ -4,15 +4,18 @@
             <h3>Your Orders</h3>
 
             <div *ngIf="orderHistoryList.length > 0">
-                <table class="table table-bordered">
-                    <tr>
+                <table class="table "
+                style="background-color:white ;
+                text-align: center;
+                padding: 5px;">
+                    <thead style="padding:10px;">
                         <th width="20%">Order Tracking Number</th>
                         <th width="10%">Total Price</th>
                         <th width="10%">Total Quantity</th>
                         <th width="10%">Date</th>
-                    </tr>
-
-                    <tr *ngFor="let tempOrderHistory of orderHistoryList">
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let tempOrderHistory of orderHistoryList">
                         <td>
                             {{ tempOrderHistory.orderTrackingNumber }}
                         </td>
@@ -26,6 +29,8 @@
                             {{ tempOrderHistory.dateCreated | date: 'medium' }}
                         </td>
                     </tr>
+                    </tbody>
+
                 </table>
             </div>
 

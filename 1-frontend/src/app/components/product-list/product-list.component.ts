@@ -33,7 +33,6 @@ export class ProductListComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
-    this.storage.setItem('Test', JSON.stringify("test"));
   }
   listProducts() {
     const hasKeyword = this.route.snapshot.paramMap.has('keyword');
@@ -52,9 +51,6 @@ export class ProductListComponent implements OnInit {
           this.thePageSize = data.page.size;
           this.theTotalElements = data.page.totalElements;
         })
-            console.log(
-      `thePageNumber=${this.thePageNumber}, thePageSize=${this.thePageSize}`
-    );
     } else {
       this.handleListProducts();
     }
@@ -97,7 +93,7 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product : Product){
     console.log("Adding to cart: "+product.name + " "+product.unitPrice)
-    
+
     const theCartItem = new CartItem(product);
     this.cartService.addToCart(theCartItem);
   }

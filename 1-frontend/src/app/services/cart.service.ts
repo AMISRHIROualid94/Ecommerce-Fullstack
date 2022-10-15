@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cartItem';
-
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class CartService {
   storage: Storage|any = sessionStorage;
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
-  
+  numberProduct:number;
   constructor() {
     // read data from Storage
     let data = JSON.parse(this.storage.getItem('cartItems'));
@@ -21,8 +21,13 @@ export class CartService {
     }
   }
 
+
+
+
+
+
   addToCart(theCartItem: CartItem) {
-    
+
     // check if we already have the item in our cart
     let alreadyExistsInCart: boolean = false;
     let existingCartItem: CartItem|any;
@@ -44,7 +49,7 @@ export class CartService {
       existingCartItem.quantity++;
     } else {
       // add the item to the array
-      this.cartItems.push(theCartItem); 
+      this.cartItems.push(theCartItem);
     }
 
     this.computeCartTotals();
@@ -72,7 +77,7 @@ export class CartService {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
-  
+
   decrementQuantity(theCartItem: CartItem) {
     theCartItem.quantity--;
 

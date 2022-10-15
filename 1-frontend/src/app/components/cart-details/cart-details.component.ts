@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/common/cartItem';
+import { Product } from 'src/app/common/product';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-cart-details',
@@ -11,7 +13,11 @@ export class CartDetailsComponent implements OnInit {
   totalPrice: number = 0.0;
   totalQuantity: number = 0;
   cartItems:CartItem[] = [];
-  constructor(private cartService : CartService) { }
+  products:Product[] = [];
+  product : Product = new Product();
+
+  constructor(private cartService : CartService,
+    private productService : ProductService) { }
 
   ngOnInit(): void {
     this.listCartDetails();
@@ -34,4 +40,6 @@ export class CartDetailsComponent implements OnInit {
   remove(tempCartItem: CartItem){
     this.cartService.remove(tempCartItem);
   }
+
+
 }

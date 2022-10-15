@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
+import { Product } from 'src/app/common/product';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { ProductService } from 'src/app/services/product.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from '../validators/validators';
 
@@ -33,10 +35,13 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
   storage:Storage = sessionStorage;
 
+  product : Product = new Product();
+
   constructor(private formBuilder: FormBuilder,
     private shopFormService : ShopFormService,
     private cartService : CartService,
     private checkoutService:CheckoutService,
+    private productService : ProductService,
     private router:Router) { }
 
   ngOnInit(): void {
@@ -45,50 +50,50 @@ export class CheckoutComponent implements OnInit {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: ['',
-        Validators.required, 
-          Validators.minLength(2), 
+        Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace],
         lastName: ['',
-        [Validators.required, 
-          Validators.minLength(2), 
+        [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]],
         email: [email,
         [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]]
       }),
       shippingAddress: this.formBuilder.group({
-        street: ['', [Validators.required, 
-          Validators.minLength(2), 
+        street: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]],
-        city: ['', [Validators.required, 
-          Validators.minLength(2), 
+        city: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]],
         state: ['', [Validators.required]],
         country: ['', [Validators.required]],
-        zipCode: ['', [Validators.required, 
-          Validators.minLength(2), 
+        zipCode: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]]
       }),
       billingAddress: this.formBuilder.group({
-        street: ['', [Validators.required, 
-          Validators.minLength(2), 
+        street: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]],
-        city: ['', [Validators.required, 
-          Validators.minLength(2), 
+        city: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]],
         state: ['', [Validators.required]],
         country: ['', [Validators.required]],
-        zipCode: ['', [Validators.required, 
-          Validators.minLength(2), 
+        zipCode: ['', [Validators.required,
+          Validators.minLength(2),
           ShopValidators.notOnlyWhitespace]]
       }),
       creditCard: this.formBuilder.group({
         cardType: ['',
         [Validators.required]],
-        nameOnCard: ['', [Validators.required, 
-        Validators.minLength(2), 
+        nameOnCard: ['', [Validators.required,
+        Validators.minLength(2),
         ShopValidators.notOnlyWhitespace]],
         cardNumber: ['',[Validators.required, Validators.pattern('[0-9]{16}')]],
-        securityCode: ['',[Validators.required, Validators.pattern('[0-9]{16}')]],
+        securityCode: ['',[Validators.required, Validators.pattern('[0-9]{3}')]],
         expirationMonth: [''],
         expirationYear: ['']
       })
@@ -170,7 +175,7 @@ copyShippingAddressToBillingAddress(event) {
     this.checkoutFormGroup.controls['billingAddress'].reset();
     this.billingAddressStates = [];
   }
-  
+
 }
 
 onSubmit() {
@@ -203,10 +208,10 @@ onSubmit() {
 
   // set up purchase
   let purchase = new Purchase();
-  
+
   // populate purchase - customer
   purchase.customer = this.checkoutFormGroup.controls['customer'].value;
-  
+
   // populate purchase - shipping address
   purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
   const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
@@ -229,7 +234,7 @@ onSubmit() {
   this.checkoutService.placeOrder(purchase).subscribe({
       next: response => {
         alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
-
+        this.UpdateUnitInStock();
         // reset cart
         this.resetCart();
 
@@ -241,19 +246,41 @@ onSubmit() {
   );
 
 }
+UpdateUnitInStock(){
+  this.cartService.cartItems.map(
+    item =>{
+    this.productService.getProductById(+item.id).subscribe(
+        product =>{
+    this.product.id = product.id;
+    this.product.sku = product.sku;
+    this.product.name = product.name;
+    this.product.description = product.description;
+    this.product.unitPrice = product.unitPrice;
+    this.product.imageUrl = product.imageUrl;
+    this.product.active = product.active;
+    this.product.unitsInStock = product.unitsInStock - item.quantity;
+    this.product.dateCreated = product.dateCreated;
+    this.product.lastUpdated = product.lastUpdated;
+    this.productService.setProductUnitInStock(this.product,+this.product.id).subscribe();
 
+        })
+    }
+  )
+}
 resetCart() {
   // reset cart data
   this.cartService.cartItems = [];
   this.cartService.totalPrice.next(0);
   this.cartService.totalQuantity.next(0);
-  
+  this.storage.setItem("cartItems",JSON.stringify([]))
   // reset the form
   this.checkoutFormGroup.reset();
 
   // navigate back to the products page
-  this.router.navigateByUrl("/products");
+  this.router.navigateByUrl("/home");
 }
+
+
 handleMonthsAndYears() {
 
   const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
@@ -294,7 +321,7 @@ getStates(formGroupName: string) {
     data => {
 
       if (formGroupName === 'shippingAddress') {
-        this.shippingAddressStates = data; 
+        this.shippingAddressStates = data;
       }
       else {
         this.billingAddressStates = data;
