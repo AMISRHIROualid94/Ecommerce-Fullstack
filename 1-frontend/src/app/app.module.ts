@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BodyComponent } from './components/body/body.component';
@@ -12,7 +13,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NoItemFoundedComponent } from './components/no-item-founded/no-item-founded.component';
 import { ProductDetailsComponent } from './components/product-list/product-details/product-details.component';
-import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -22,6 +22,7 @@ import {OKTA_CONFIG,OktaAuthModule} from '@okta/okta-angular';
 import myConfigApp from './config/my-config-app';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { HomeContentComponent } from './components/home-content/home-content.component';
 
 
 
@@ -44,11 +45,11 @@ const oktaConfig = Object.assign({
     HeaderComponent,
     NoItemFoundedComponent,
     ProductDetailsComponent,
-    HomeComponent,
     CartDetailsComponent,
     CheckoutComponent,
     LoginComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    HomeContentComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +61,7 @@ const oktaConfig = Object.assign({
     NgbModule,
     ReactiveFormsModule,
     MatBadgeModule,
+    MatCardModule,
     OktaAuthModule
   ],
   providers: [

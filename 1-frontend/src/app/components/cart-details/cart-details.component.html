@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="section-content section-content-p30">
       <div class="container-fluid">
-        <div class="bg-white cnt" *ngIf="cartItems.length > 0"> 
+        <div class="bg-white cnt" *ngIf="cartItems.length > 0">
             <div class="cartListDetails card" *ngFor="let tempCartItem of cartItems">
                 <div class="item-img flex-grow-1" style="text-align: center;">
                     <img
@@ -13,12 +13,12 @@
                 <div class="item-details flex-grow-1" style="width:100px ;">
                     <p class="fw-bold">{{ tempCartItem.name }}</p>
                     <p class="fw-bold">{{ tempCartItem.unitPrice | currency: "USD" }}</p>
-             
+
                 </div>
                 <div class="item-crud flex-grow-3" style="width:300px;">
                     <div class="items">
                         <label>Quantity:</label>
-        
+
                         <div class="row no-gutters">
                           <div class="col">
                             <button
@@ -28,11 +28,11 @@
                               <i class="fas fa-plus"></i>
                             </button>
                           </div>
-        
+
                           <div class="col ml-4 mr-2">
                             {{ tempCartItem.quantity }}
                           </div>
-        
+
                           <div class="col">
                             <button
                               (click)="decrementQuantity(tempCartItem)"
@@ -41,11 +41,11 @@
                               <i class="fas fa-minus"></i>
                             </button>
                           </div>
-        
+
                           <div class="col-8"></div>
                         </div>
                       </div>
-        
+
                       <div>
                         <button
                           (click)="remove(tempCartItem)"
@@ -54,31 +54,31 @@
                           Remove
                         </button>
                       </div>
-        
+
                       <p class="mt-2">
                         Subtotal:
                         {{
                           tempCartItem.quantity * tempCartItem.unitPrice
-                            | currency: "USD"
+                            | currency: "DH"
                         }}
                       </p>
                 </div>
-            </div>   
+            </div>
             <div class="checkout card">
                 <p>Total Quantity: {{ totalQuantity }}</p>
                 <p>Shipping: FREE</p>
-                <p>Total Price: {{ totalPrice | currency: "USD" }}</p>
+                <p>Total Price: {{ totalPrice | currency: "DH" }}</p>
                 <div>
                   <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
                 </div>
-            </div>   
+            </div>
     <!--      <table class="table table-bordered">
             <tr>
               <th width="20%" scope="col">Product Image</th>
               <th width="50%" scope="col">Product Detail</th>
               <th width="30%" scope="col"></th>
             </tr>
-  
+
             <tr *ngFor="let tempCartItem of cartItems">
               <td>
                 <img
@@ -94,7 +94,7 @@
               <td>
                 <div class="items">
                   <label>Quantity:</label>
-  
+
                   <div class="row no-gutters">
                     <div class="col">
                       <button
@@ -104,11 +104,11 @@
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
-  
+
                     <div class="col ml-4 mr-2">
                       {{ tempCartItem.quantity }}
                     </div>
-  
+
                     <div class="col">
                       <button
                         (click)="decrementQuantity(tempCartItem)"
@@ -117,11 +117,11 @@
                         <i class="fas fa-minus"></i>
                       </button>
                     </div>
-  
+
                     <div class="col-8"></div>
                   </div>
                 </div>
-  
+
                 <div>
                   <button
                     (click)="remove(tempCartItem)"
@@ -130,7 +130,7 @@
                     Remove
                   </button>
                 </div>
-  
+
                 <p class="mt-2">
                   Subtotal:
                   {{
@@ -140,7 +140,7 @@
                 </p>
               </td>
             </tr>
-  
+
             <tr>
               <td colspan="2"></td>
               <td style="font-weight: bold">
@@ -154,7 +154,7 @@
             </tr>
           </table>-->
         </div>
-  
+
         <!-- if cart is empty then display a message -->
         <div
           *ngIf="cartItems.length == 0"

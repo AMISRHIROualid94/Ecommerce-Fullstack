@@ -5,8 +5,8 @@
             <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()" class="card">
 
                 <!-- customer form group -->
-                <div formGroupName="customer" class="form-area">
-                    <h3>Customer</h3>
+                <div formGroupName="customer" class="form-area card">
+                    <h3><b>Customer</b></h3>
 
                     <div class="row">
                         <div class="col-md-2"> <label>First Name</label></div>
@@ -46,7 +46,7 @@
                                     </div>
 
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                 </div>
 
                 <!-- shipping Address -->
-                <div formGroupName="shippingAddress" class="form-area">
-                    <h3>Shipping Address</h3>
+                <div formGroupName="shippingAddress" class="form-area card">
+                    <h3><b>Shipping Address</b></h3>
 
                     <div class="row">
                         <div class="col-md-2"> <label>Country</label></div>
@@ -151,7 +151,7 @@
                                         State is required
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -187,8 +187,8 @@
 
 
                 <!-- Billing Address -->
-                <div formGroupName="billingAddress" class="form-area">
-                    <h3>Billing Address</h3>
+                <div formGroupName="billingAddress" class="form-area card">
+                    <h3><b>Billing Address</b></h3>
 
                     <div class="row">
                         <div class="col-md-2"> <label>Country</label></div>
@@ -291,8 +291,8 @@
                 </div>
 
                 <!-- Credit Card -->
-                <div formGroupName="creditCard" class="form-area">
-                    <h3>Credit Card</h3>
+                <div formGroupName="creditCard" class="form-area card">
+                    <h3><b>Credit Card</b></h3>
 
                     <div class="row">
                         <div class="col-md-2"> <label>Card Type</label></div>
@@ -402,7 +402,7 @@
 
                     <p>Total Quantity: {{ totalQuantity }}</p>
                     <p>Shipping: FREE</p>
-                    <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
+                    <p>Total Price: {{ totalPrice | currency: 'DH' }}</p>
                 </div>
 
                 <!-- submit button-->
